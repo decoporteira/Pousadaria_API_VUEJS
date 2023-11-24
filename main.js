@@ -3,42 +3,58 @@
 const  app = Vue.createApp({
     data() {
         return {
-            listData: [
+            searchText: '',
+            innsList: [
                  
         ], listRoom: []
         }
     },
+    computed: {
+        listData(){
+            if(this.searchText) {
+                console.log(this.searchText)
+                return this.listData.filter(object => {
+                    return object.trade_name.toLowerCase().includes(this.searchText.toLowerCase());
+                });
+            } else {
+                return this.innsList;
+            }
+        }
+    },
     async mounted(){
-        this.listData = await this.getInns();
+        this.innsList = await this.getInns();
     },
     
     methods:{
         async getInns() {
             let response = await fetch('http://127.0.0.1:3000/api/v1/inns/')
-            let data = await response.json()
+            let innsData = await response.json()
             this.listRoom = []
-            this.listData = []
-            data.forEach(item => {
-                var object = new Object();
-                object.trade_name = item.trade_name
-                object.email = item.email
-                object.city = item.city
-                object.id = item.id
-                object.description = item.description
-                this.listData.push(object)
-
+            this.innsList = []
+           
+            innsData.forEach(item => {
+                var inn = new Object();
+                inn.trade_name = item.trade_name
+                inn.email = item.email
+                inn.city = item.city
+                inn.id = item.id
+                inn.description = item.description
+                
+                this.innsList.push(inn)
+               
             });
+            
         },
         async getInn(id){
             let response = await fetch('http://127.0.0.1:3000/api/v1/inns/inn_details/?id=' + id)
-            let data = await response.json()
-            this.listData = []
-            var object = new Object();
-            object.trade_name = data.trade_name
-            object.email = data.email
-            object.city = data.city
-            object.nota = data.nota
-            this.listData.push(object)
+            let innData = await response.json()
+            this.innsList = []
+            var inn = new Object();
+            inn.trade_name = innData.trade_name
+            inn.email = innData.email
+            inn.city = innData.city
+            inn.nota = innData.nota
+            this.innsList.push(inn)
                
             let rooms = await fetch('http://127.0.0.1:3000/api/v1/inns/rooms?id=' + id)
             let rooms_data = await rooms.json()

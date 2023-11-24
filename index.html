@@ -9,34 +9,42 @@
   <body>
     <div id="app">
       <h1>Pousadaria - API</h1>
-
+      <input
+        class="input"
+        type="text"
+        v-model="searchText"
+        placeholder="Entre com um nome"
+      />
       <button class="btn-carregar" v-on:click="getInns()">Início</button>
-      <div v-if="listData.length <= 0">Nenhuma pousada encontrada.</div>
+      <div v-if="innsList.length <= 0">Nenhuma pousada encontrada.</div>
       <ul>
-        <li v-for="item, index in listData">
+        <li v-for="item, in innsList">
           <div class="card">
             <h2>{{ item.trade_name }}</h2>
             <p>{{ item.email }}</p>
             <p>{{ item.city }}</p>
             <p v-if="item.description"><i>{{ item.description }}</i></p>
             <p v-if="item.nota">{{ item.nota }}</p>
+            <p v-if="item.description"><i>{{ item.id }}</i></p>
 
-            <button class="btn-carregar" v-on:click="getInn( item.id)">
+            <button class="btn-carregar" v-on:click="getInn(item.id)">
               Ver Detalhes
             </button>
             <div v-if="listRoom.length >= 1">
               <div v-for="item, index in listRoom">
-                <p><h3>{{ item.name }}</h3></p>
+                <h3>{{ item.name }}</h3>
                 <p><i>{{item.description}}</i></p>
                 <p><strong>Tamanho:</strong> {{item.size}} m2</p>
                 <p><strong>Hóspedes: </strong>{{item.guest}}</p>
                 <p><strong>Diária: </strong> R$ {{item.daily_rate}}</p>
                 <p><strong>Varanda: </strong>{{ item.balcony}}</p>
-                <p><strong>Ar condicionado: </strong>{{item.air_conditioner}}</p>
-                    <p><strong>TV: </strong>{{item.tv}}</p>
-                        <p><strong>Guarda-roupas: </strong> {{item.wardrobe}}</p>
-                            <p><strong>Cofre: </strong>{{item.safe}}</p>
-                                <p><strong>Acessibilidade: </strong>{{item.accessible}}</p>
+                <p>
+                  <strong>Ar condicionado: </strong>{{item.air_conditioner}}
+                </p>
+                <p><strong>TV: </strong>{{item.tv}}</p>
+                <p><strong>Guarda-roupas: </strong> {{item.wardrobe}}</p>
+                <p><strong>Cofre: </strong>{{item.safe}}</p>
+                <p><strong>Acessibilidade: </strong>{{item.accessible}}</p>
                 <p>-----------</p>
               </div>
             </div>
