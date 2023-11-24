@@ -1,0 +1,44 @@
+body {
+    background-color: #f8f9fd;
+    text-align: center;
+}
+
+li {
+    list-style: none;
+    display: inline-block;
+}
+.card {
+    background-color: #fff;
+    margin-right: 10px;
+    margin-top: 10px;
+    padding: 20px;
+    text-align: center;
+    border-radius: 25px;
+}
+.card-img {
+    border-radius: 50%;
+}
+.button-delete {
+    margin-top: 10px;
+    background-color: red;
+    color: white;
+    font-size: 16px;
+    border: none;
+    padding: 8px;
+    border-radius: 6px;
+}
+.btn-carregar{
+    background-color: #3e57db;
+    color: white;
+    font-size: 16px;
+    border: none;
+    padding: 8px;
+    border-radius: 6px;
+    margin-left: 10px;
+}
+.input {
+    font-size: 16px;
+    padding: 8px;
+    border: none;
+    border-radius: 6px;
+}
