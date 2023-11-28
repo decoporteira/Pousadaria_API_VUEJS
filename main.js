@@ -4,16 +4,16 @@ const  app = Vue.createApp({
     data() {
         return {
             searchText: '',
-            innsList: [
-                 
-        ], listRoom: []
+            innsList: [], 
+            listRoom: [],
+           
         }
     },
     computed: {
         listData(){
             if(this.searchText) {
                 console.log(this.searchText)
-                return this.listData.filter(object => {
+                return this.innsList.filter(object => {
                     return object.trade_name.toLowerCase().includes(this.searchText.toLowerCase());
                 });
             } else {
@@ -22,11 +22,12 @@ const  app = Vue.createApp({
         }
     },
     async mounted(){
-        this.innsList = await this.getInns();
+        this.innsList = this.getInns();
     },
     
     methods:{
         async getInns() {
+            this.searchText = '';
             let response = await fetch('http://127.0.0.1:3000/api/v1/inns/')
             let innsData = await response.json()
             this.listRoom = []
