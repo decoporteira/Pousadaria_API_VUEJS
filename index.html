@@ -18,6 +18,12 @@
       <button class="btn-carregar" v-on:click="getInns()">Início</button>
       <div v-if="innsList.length <= 0">Nenhuma pousada encontrada.</div>
       <ul>
+        <li v-for="item, in listCities">
+          <p>{{ item.city }}</p>
+        </li>
+      </ul>
+
+      <ul>
         <li v-for="item, in listData">
           <div class="card">
             <h2>{{ item.trade_name }}</h2>

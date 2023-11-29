@@ -6,6 +6,7 @@ const  app = Vue.createApp({
             searchText: '',
             innsList: [], 
             listRoom: [],
+            listCities: [],
            
         }
     },
@@ -23,6 +24,7 @@ const  app = Vue.createApp({
     },
     async mounted(){
         this.innsList = this.getInns();
+        this.listCities = this.getCities();
     },
     
     methods:{
@@ -45,6 +47,22 @@ const  app = Vue.createApp({
                
             });
             
+        },
+        async getCities() {
+            let response = await fetch('http://127.0.0.1:3000/api/v1/cities/')
+            let listCitiesData = await response.json()  
+            this.listCities = []
+            console.log('entrou')        
+            listCitiesData.forEach(item => {
+                var city = new Object();
+                console.log()
+                city.city = item.city
+                this.listCities.push(city)
+                 
+            })
+            console.log(this.listCities) 
+            
+
         },
         async getInn(id){
             let response = await fetch('http://127.0.0.1:3000/api/v1/inns/inn_details/?id=' + id)
