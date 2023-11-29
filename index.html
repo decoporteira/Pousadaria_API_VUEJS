@@ -19,7 +19,9 @@
       <div v-if="innsList.length <= 0">Nenhuma pousada encontrada.</div>
       <ul>
         <li v-for="item, in listCities">
-          <p>{{ item.city }}</p>
+          <button class="btn-carregar" v-on:click="getInnByCity(item.city)">
+            {{ item.city }}
+          </button>
         </li>
       </ul>
 
@@ -30,8 +32,7 @@
             <p>{{ item.email }}</p>
             <p>{{ item.city }}</p>
             <p v-if="item.description"><i>{{ item.description }}</i></p>
-            <p v-if="item.nota">{{ item.nota }}</p>
-            <p v-if="item.description"><i>{{ item.id }}</i></p>
+            <p v-if="item.nota">Nota: {{ item.nota }}</p>
 
             <button class="btn-carregar" v-on:click="getInn(item.id)">
               Ver Detalhes

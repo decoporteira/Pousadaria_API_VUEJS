@@ -13,7 +13,6 @@ const  app = Vue.createApp({
     computed: {
         listData(){
             if(this.searchText) {
-                console.log(this.searchText)
                 return this.innsList.filter(object => {
                     return object.trade_name.toLowerCase().includes(this.searchText.toLowerCase());
                 });
@@ -51,16 +50,14 @@ const  app = Vue.createApp({
         async getCities() {
             let response = await fetch('http://127.0.0.1:3000/api/v1/cities/')
             let listCitiesData = await response.json()  
-            this.listCities = []
-            console.log('entrou')        
+            this.listCities = []    
             listCitiesData.forEach(item => {
                 var city = new Object();
-                console.log()
                 city.city = item.city
                 this.listCities.push(city)
                  
             })
-            console.log(this.listCities) 
+    
             
 
         },
@@ -96,6 +93,25 @@ const  app = Vue.createApp({
             });
            
         },
+        async getInnByCity(city) {
+
+            let response = await fetch('http://127.0.0.1:3000/api/v1/inns_by_city?city=' + city)
+            let inns_by_city = await response.json() 
+            this.listRoom = []
+            this.innsList = []
+           
+            inns_by_city.forEach(item => {
+                var inn = new Object();
+                inn.trade_name = item.trade_name
+                inn.email = item.email
+                inn.city = item.city
+                inn.id = item.id
+                inn.description = item.description
+                
+                this.innsList.push(inn)
+               
+            });
+        }
         
 
         
